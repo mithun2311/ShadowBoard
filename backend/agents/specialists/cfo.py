@@ -1,5 +1,5 @@
 from google.adk.agents import Agent
-
+from agents.tools.qdrant_tools import search_documents
 from agents.prompts.cfo_prompt import CFO_SYSTEM_PROMPT
 
 from agents.tools.finance_tools import (
@@ -16,5 +16,6 @@ tools=[
     calculate_roi,
     estimate_budget,
     cost_breakdown,
+    search_documents,
 ],
 )
