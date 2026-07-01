@@ -1,6 +1,5 @@
 from google.adk.agents import Agent
 from agents.prompts.legal_prompt import LEGAL_SYSTEM_PROMPT
-from agents.tools.qdrant_tools import search_documents
 from agents.tools.legal_tools import (
     assess_compliance,
     identify_legal_risk,
@@ -13,6 +12,5 @@ legal_agent = Agent(
 tools=[
     assess_compliance,
     identify_legal_risk,
-    search_documents,
 ],
 )
