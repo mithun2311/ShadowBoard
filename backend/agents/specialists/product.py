@@ -1,6 +1,5 @@
 from google.adk.agents import Agent
 from agents.prompts.product_prompt import PRODUCT_SYSTEM_PROMPT
-from agents.tools.qdrant_tools import search_documents
 from agents.tools.product_tools import (
     prioritize_feature,
     estimate_release,
@@ -13,6 +12,5 @@ product_agent = Agent(
 tools=[
     prioritize_feature,
     estimate_release,
-    search_documents,
 ],
 )
