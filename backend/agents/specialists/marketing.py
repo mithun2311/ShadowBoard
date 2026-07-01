@@ -1,6 +1,6 @@
 from google.adk.agents import Agent
 from agents.prompts.marketing_prompt import MARKETING_SYSTEM_PROMPT
-
+from agents.tools.qdrant_tools import search_documents
 from agents.tools.marketing_tools import (
     estimate_campaign,
     recommend_channel,
@@ -15,5 +15,6 @@ marketing_agent = Agent(
 tools=[
     estimate_campaign,
     recommend_channel,
+    search_documents,
 ],
 )
