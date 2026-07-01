@@ -18,6 +18,10 @@ from app.db.models.user import User
 from app.db.session import get_db
 from app.schemas.document import DocumentResponse
 from app.utils.file_storage import save_uploaded_file
+from app.services.extraction.extractor import extract_document
+from app.services.chunking import chunk_text
+from app.services.qdrant_client.indexer import index_chunks
+
 
 router = APIRouter(
     prefix="/documents",
@@ -66,18 +70,26 @@ async def upload_document(
         )
 
     filename, path = await save_uploaded_file(file)
-
     document = Document(
         project_id=project.id,
         filename=file.filename,
         file_path=path,
         file_type=extension,
-    )
-
+        )
     db.add(document)
-
     await db.commit()
-
     await db.refresh(document)
+    text = extract_document(path)
+    chunks = chunk_text(text)
+    index_chunks(
+    chunks,
+    metadata={
+        "project_id": str(project.id),
+        "filename": file.filename,
+        "owner_id": str(current_user.id),
+    },
+)
+
+
 
     return document
