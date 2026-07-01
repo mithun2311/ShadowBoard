@@ -58,7 +58,7 @@ class Settings(BaseSettings):
     # ------------------------
     # CORS
     # ------------------------
-    CORS_ORIGINS: str = "http://localhost:5173"
+    CORS_ORIGINS: str
 
 
 settings = Settings()
