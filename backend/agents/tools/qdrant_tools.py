@@ -1,8 +1,9 @@
+from app.core.config import settings
 from qdrant_client import QdrantClient
 
 client = QdrantClient(
-    host="localhost",
-    port=6333,
+    url=settings.QDRANT_URL,
+    api_key=settings.QDRANT_API_KEY,
 )
 
 
