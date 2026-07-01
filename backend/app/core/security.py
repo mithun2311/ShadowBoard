@@ -22,6 +22,10 @@ oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl="/auth/login"
 )
 def hash_password(password: str) -> str:
+    print("========== HASH PASSWORD DEBUG ==========")
+    print("Password repr:", repr(password))
+    print("Length:", len(password))
+    print("Bytes:", len(password.encode("utf-8")))
     return pwd_context.hash(password)
 
 
