@@ -26,6 +26,4 @@ openpyxl
 google-adk==2.3.0
 pydantic[email]
 pypdf
-docx
-
-exceptions
+python-docx
