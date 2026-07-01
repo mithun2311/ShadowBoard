@@ -8,6 +8,8 @@ from app.schemas.ai import (
     AIQueryResponse,
 )
 
+from app.services.qdrant_client.retrieval import retrieve_context
+
 from agents.runtime import (
     runner,
     session_service,
@@ -36,6 +38,23 @@ async def query_ai(request: AIQueryRequest):
         session_id=session_id,
     )
 
+    # Retrieve relevant document context from Qdrant
+    context = retrieve_context(request.query)
+
+    # Build prompt
+    if context.strip():
+        prompt = f"""
+Use the following retrieved document context while answering.
+
+Retrieved Context:
+{context}
+
+User Question:
+{request.query}
+"""
+    else:
+        prompt = request.query
+
     final_text = ""
 
     async for event in runner.run_async(
@@ -44,7 +63,7 @@ async def query_ai(request: AIQueryRequest):
         new_message=types.Content(
             role="user",
             parts=[
-                types.Part(text=request.query),
+                types.Part(text=prompt),
             ],
         ),
     ):
