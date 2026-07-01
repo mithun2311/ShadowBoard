@@ -25,3 +25,4 @@ pandas
 openpyxl
 google-adk==2.3.0
 pydantic[email]
+pypdf
