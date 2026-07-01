@@ -28,3 +28,4 @@ pydantic[email]
 pypdf
 docx
 
+exceptions
