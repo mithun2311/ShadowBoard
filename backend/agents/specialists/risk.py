@@ -4,7 +4,7 @@ from agents.tools.risk_tools import (
     mitigation_plan,
 )
 from agents.prompts.risk_prompt import RISK_SYSTEM_PROMPT
-
+from agents.tools.qdrant_tools import search_documents
 
 risk_agent = Agent(
     name="risk_agent",
@@ -15,5 +15,6 @@ risk_agent = Agent(
 tools=[
     assess_risk,
     mitigation_plan,
+    search_documents,
 ],
 )
