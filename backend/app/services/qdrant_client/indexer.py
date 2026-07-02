@@ -16,14 +16,13 @@ def index_chunks(
 ):
 
     if not chunks:
-        print("No chunks found.")
+        print("No chunks found. Skipping indexing.")
         return 0
 
     ensure_collection()
 
-    points = []
-
     metadata = metadata or {}
+    points = []
 
     for chunk in chunks:
 
@@ -33,7 +32,6 @@ def index_chunks(
         vector = generate_embedding(chunk)
 
         if not vector:
-            print("Embedding generation failed.")
             continue
 
         points.append(
@@ -47,8 +45,6 @@ def index_chunks(
             )
         )
 
-    print("Points created:", len(points))
-
     if not points:
         print("No points generated. Skipping upsert.")
         return 0
@@ -58,11 +54,6 @@ def index_chunks(
         points=points,
     )
 
-    return len(points)        )
-
-    client.upsert(
-        collection_name=settings.QDRANT_COLLECTION,
-        points=points,
-    )
+    print(f"Indexed {len(points)} chunks into Qdrant.")
 
     return len(points)
