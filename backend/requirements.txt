@@ -1,3 +1,5 @@
+passlib[argon2]==1.7.4
+argon2-cffi
 fastapi==0.138.2
 uvicorn[standard]==0.34.0
 pydantic==2.13.4
